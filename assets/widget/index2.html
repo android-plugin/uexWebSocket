@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript">
+         window.uexOnload = function(type){
+            uexWebSocket.onClose = function() {
+                console.log('onClose');
+            };
+            uexWebSocket.onMessage = function(data) {
+                console.log('[data]' + data);
+            };
+            uexWebSocket.onConnect = function() {
+                console.log('connect.....');
+            };
+
+
+        }
+        function openWebSocket() {
+            uexWebSocket.open("ws://192.168.1.69:8887");
+        }
+        function send() {
+            var data = document.getElementById("data").value;
+            uexWebSocket.send(data);
+        }
+        function closeConnection() {
+            uexWebSocket.close();
+        }
+    </script>
+</head>
+
+<body>
+	<div class="tit">uexUmeng Test</div>
+	<div class="conbor">
+		<div class="consj">
+            <input class="btn" type="button" onClick="openWebSocket()" value="open"/>
+			<input id="data" placeholder="请输入数据"><input class="btn" type="button" onClick="send()" value="send"/>
+			<input class="btn" type="button" onClick="closeConnection()" value="close"/>
+		</div>
+	</div>
+</body>
+</html>
