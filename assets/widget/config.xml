@@ -5,7 +5,8 @@
 	<author email=""> </author>
 	<icon src="icon.png"/>
 	<license href=""/>
-	<content encoding="utf-8" src="index2.html"/>
+    <!--如果需要单元测试脚本，就用index2.html-->
+	<content encoding="utf-8" src="index.html"/>
 	<updateurl/>
 	<logserverip/>
 	<showmyspace>false</showmyspace>
