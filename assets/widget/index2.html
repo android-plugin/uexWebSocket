@@ -20,10 +20,16 @@
 
         }
         function openWebSocket() {
-            uexWebSocket.open("ws://192.168.1.69:8887");
+            var data = {
+                url: "ws://192.168.1.69:8887"
+            }
+            uexWebSocket.open(data);
         }
         function send() {
-            var data = document.getElementById("data").value;
+            var text = document.getElementById("data").value;
+            var data = {
+                data: text
+            }
             uexWebSocket.send(data);
         }
         function closeConnection() {

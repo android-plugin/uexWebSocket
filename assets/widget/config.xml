@@ -6,7 +6,7 @@
 	<icon src="icon.png"/>
 	<license href=""/>
     <!--如果需要单元测试脚本，就用index2.html-->
-	<content encoding="utf-8" src="index.html"/>
+	<content encoding="utf-8" src="index2.html"/>
 	<updateurl/>
 	<logserverip/>
 	<showmyspace>false</showmyspace>

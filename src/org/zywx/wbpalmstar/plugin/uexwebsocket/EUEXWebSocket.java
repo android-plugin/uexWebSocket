@@ -2,11 +2,12 @@ package org.zywx.wbpalmstar.plugin.uexwebsocket;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_17;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.zywx.wbpalmstar.engine.EBrowserView;
 import org.zywx.wbpalmstar.engine.universalex.EUExBase;
 
@@ -29,9 +30,20 @@ public class EUExWebSocket extends EUExBase {
         if (TextUtils.isEmpty(args[0])) {
             return;
         }
+        JSONObject jsonObject = null;
+        String url = null;
+        try {
+            jsonObject = new JSONObject(args[0]);
+            url = jsonObject.optString("url");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (TextUtils.isEmpty(url)) {
+            return;
+        }
         //"ws://192.168.1.69:8887"
         try {
-            webSocketClient = new WebSocketClient(new URI(args[0]), new Draft_17()) {
+            webSocketClient = new WebSocketClient(new URI(url), new Draft_17()) {
                 @Override
                 public void onOpen(ServerHandshake serverHandshake) {
                     callBackJsObject(ON_CONNECT, null);
@@ -61,7 +73,18 @@ public class EUExWebSocket extends EUExBase {
 
     }
     public void send(String []args) {
-        webSocketClient.send(args[0]);
+        if (TextUtils.isEmpty(args[0])) {
+            return;
+        }
+        JSONObject jsonObject = null;
+        String data = null;
+        try {
+            jsonObject = new JSONObject(args[0]);
+            data = jsonObject.optString("data");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        webSocketClient.send(data);
     }
     public void close(String[] args) {
         webSocketClient.close();

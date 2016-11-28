@@ -7,32 +7,44 @@ if (UNIT_TEST) {
 
     var uexWebSocketCase = {
         "open": function () {
-            uexWebSocket.open("ws://192.168.1.69:8887");
+             var data = {
+                url: "ws://192.168.1.69:8887"
+            }
+            uexWebSocket.open(data);
             UNIT_TEST.assert(true);
             uexWebSocket.close();
         },
         "onConnect":function () {
-
-            uexWebSocket.open("ws://192.168.1.69:8887");
+             var data = {
+                url: "ws://192.168.1.69:8887"
+            }
+            uexWebSocket.open(data);
             uexWebSocket.onConnect = function() {
                 UNIT_TEST.log("--------> connected.")
                 UNIT_TEST.assert(true);
             }
         },
         "send":function () {
-            uexWebSocket.send("test data");
+            var data = {
+                data: 'text'
+            }
+            uexWebSocket.send(data);
             UNIT_TEST.assert(true);
         },
         "onMessage": function() {
             UNIT_TEST.log("请用服务端向客户端发送一条消息");
-            uexWebSocket.send("test data");
+            var data = {
+                data: 'text'
+            }
+            uexWebSocket.send(data);
             uexWebSocket.onMessage = function(data) {
                 UNIT_TEST.log("[receive data]" + data);
                 UNIT_TEST.assert(true);
             }
         },
-        "close": function () {
-            uexWebSocket.close();
+        "close": function close() {
+            uexWebSocket.();
+            UNIT_TEST.assert(true);
         }
 
     };
